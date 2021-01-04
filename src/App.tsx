@@ -1,24 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Route, BrowserRouter } from 'react-router-dom';
+
+import Index from './pages/Index';
+import Add from './pages/Add';
+import Remove from './pages/Remove';
+
 import './App.css';
+import { TasksContextProvider } from './contexts/tasksContext';
+import Arrange from './pages/Arrange';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <TasksContextProvider>
+        <BrowserRouter>
+          <Route path='/arrange' exact render={() => <Arrange />} />
+          <Route path='/add' exact render={() => <Add />} />
+          <Route path='/remove' exact render={() => <Remove />} />
+          <Route path='/' exact render={() => <Index />} />
+        </BrowserRouter>
+      </TasksContextProvider>
     </div>
   );
 }
